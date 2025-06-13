@@ -1,5 +1,13 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@{
-	Layout = null;
-}
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{ Layout = "_Layout.cshtml"; ViewData["Title"] = "Booking"; }
+<section class="booking">
+  <h1>Booking</h1>
+  <p>@Model.Value("bookingText")</p>
+  @{
+    var link = Model.Value<IEnumerable<Umbraco.Cms.Core.Models.Link>>("bookingLink")?.FirstOrDefault();
+  }
+  @if (link != null)
+  {
+    <a href="@link.Url" class="btn">Book Now</a>
+  }
+</section>

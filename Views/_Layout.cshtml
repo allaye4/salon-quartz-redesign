@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Salon Quartz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+        <div class="container" style="display:flex; justify-content:space-between; align-items:center; padding:1em 2em;">
+            <a href="/" class="logo" style="font-family:'Playfair Display', serif; font-size: 1.8rem; font-weight:600; color:#b17a5b; text-decoration:none;">
+                Salon Quartz
+            </a>
+            <nav>
+                <ul style="list-style:none; margin:0; padding:0; display:flex; gap: 1.5em; font-family:'Playfair Display', serif;">
+                    <li><a href="/" style="color:#b17a5b; text-decoration:none;">Home</a></li>
+                    <li><a href="/shop" style="color:#b17a5b; text-decoration:none;">Shop</a></li>
+                    <li><a href="/booking" style="color:#b17a5b; text-decoration:none;">Booking</a></li>
+                    <li><a href="/about" style="color:#b17a5b; text-decoration:none;">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer style="background:#222; color:#eee; padding: 2em; text-align:center; font-family: 'Playfair Display', serif; font-size:0.9rem;">
+        <p>© @DateTime.Now.Year Salon Quartz. All rights reserved.</p>
+        <p>
+            <a href="https://instagram.com/salonquartz" target="_blank" style="color:#b17a5b; text-decoration:none; margin-right:1em;">Instagram</a>
+            <a href="https://facebook.com/salonquartz" target="_blank" style="color:#b17a5b; text-decoration:none;">Facebook</a>
+        </p>
+    </footer>
+
+</body>
+</html>

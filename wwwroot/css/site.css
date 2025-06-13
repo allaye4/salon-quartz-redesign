@@ -1,0 +1,91 @@
+:root {
+  --bg: #fff;
+  --text: #333;
+  --accent: #e0afa0;
+  --btn-bg: #b07b72;
+  --btn-text: #fff;
+  --font-body: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+a.btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  padding: 0.75em 1.5em;
+  text-decoration: none;
+  border-radius: 4px;
+}
+a.btn:hover {
+  opacity: 0.9;
+}
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1em;
+}
+.home-hero,
+.about,
+.booking,
+.shop {
+  margin-bottom: 2em;
+}
+.about img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+:root {
+  --font-title: "Playfair Display", serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-title);
+  font-weight: 600;
+  margin-bottom: 0.5em;
+}
+.card {
+  background: #fff;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+}
+section {
+  padding: 3em 1em;
+}
+img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+.home-hero {
+  background: url("/images/hero.jpg") center/cover no-repeat;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.home-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.home-hero .content {
+  position: relative;
+  z-index: 1;
+}

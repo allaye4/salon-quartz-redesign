@@ -1,5 +1,7 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@{
-	Layout = null;
-}
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{ Layout = "_Layout.cshtml"; ViewData["Title"] = Model.Value("pageTitle"); }
+<section class="about">
+  <h1>@Model.Value("pageTitle")</h1>
+  <div>@Html.Raw(Model.Value("bioContent"))</div>
+  <img src="@Model.MediaUrl("teamPhoto")" alt="Team Photo" />
+</section>

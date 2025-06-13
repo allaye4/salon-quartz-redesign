@@ -1,5 +1,37 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Home";
+}
 
-<h1>@Model.Value("pageTitle")</h1>
-<p>@Model.Value("mainContent")</p>
+<section style="font-family: 'Playfair Display', serif; color: #4a4a4a; max-width: 1000px; margin: 2em auto; padding: 0 1em;">
+    <div style="text-align:center; margin-bottom: 2em;">
+        <h1 style="font-size: 3rem; color: #b17a5b; margin-bottom: 0.5em;">Welcome to Salon Quartz</h1>
+        <p style="font-size: 1.25rem; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+            Your beauty destination in the heart of the city. Discover luxury treatments, expert stylists, and a welcoming atmosphere crafted just for you.
+        </p>
+    </div>
+
+    <div style="display: flex; gap: 2em; flex-wrap: wrap; justify-content: center;">
+        <div style="flex: 1 1 300px; background: #f9f5f1; padding: 1.5em; border-radius: 8px; box-shadow: 0 3px 8px rgba(177,122,91,0.2);">
+            <h2 style="color: #b17a5b; margin-bottom: 0.5em;">Our Services</h2>
+            <p>From haircuts to spa treatments, we provide a full range of beauty services tailored to your needs.</p>
+        </div>
+        <div style="flex: 1 1 300px; background: #f9f5f1; padding: 1.5em; border-radius: 8px; box-shadow: 0 3px 8px rgba(177,122,91,0.2);">
+            <h2 style="color: #b17a5b; margin-bottom: 0.5em;">Exclusive Products</h2>
+            <p>Explore our curated collection of premium beauty products, handpicked for quality and sustainability.</p>
+        </div>
+        <div style="flex: 1 1 300px; background: #f9f5f1; padding: 1.5em; border-radius: 8px; box-shadow: 0 3px 8px rgba(177,122,91,0.2);">
+            <h2 style="color: #b17a5b; margin-bottom: 0.5em;">Book Your Visit</h2>
+            <p>Easy online booking lets you schedule your appointment anytime, hassle-free.</p>
+        </div>
+    </div>
+</section>
+<section style="background: #f9f5f1; padding: 2em 0; text-align: center;">
+	<h2 style="color: #b17a5b; margin-bottom: 1em;">Join Our Community</h2>
+	<p style="max-width: 600px; margin: 0 auto; font-size: 1.1rem;">
+		Follow us on social media for the latest updates, beauty tips, and exclusive offers.
+	</p>
+	<div style="margin-top: 1em;">
+		<a href="https://instagram.com/salonquartz" target="_blank" style="color: #b17a5b; text-decoration: none; margin-right: 1em;">Instagram</a>
+		<a href="https://facebook.com/salonquartz" target="_blank" style="color: #b17a5b; text-decoration: none;">Facebook</a>
+	</div>
