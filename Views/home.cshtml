@@ -5,61 +5,80 @@
     ViewData["Title"] = "Home";
     var hero = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("heroImage");
     var heroUrl = hero != null ? hero.Url() : "";
+    var braids = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("braidsImage");
+    var silkPress = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("silkPressImage");
+    var locMaintenance = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("locMaintenanceImage");
+    var naturalStyles = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("naturalStylesImage");
 }
 
+
 <!-- HERO SECTION -->
-<section class="hero-section" style="position: relative; height: 90vh; background-image: url('@heroUrl'); background-size: cover; background-position: center;">
+<section class="hero-section fade-in" style="position: relative; height: 90vh; background-image: url('@heroUrl'); background-size: cover; background-position: center;">
     <div style="position: absolute; inset: 0; background-color: rgba(255,255,255,0.11);"></div>
     <div style="position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 1em;">
-        <h1 class="hero-title">Beauty Redefined</h1>
-        <p class="hero-text">Experience elegance and self-care with expert stylists at Salon Quartz.</p>
+        <h1 class="hero-title fade-in delay-200">Beauty Redefined</h1>
+        <p class="hero-text fade-in delay-400">Experience elegance and self-care with expert stylists at Salon Quartz.</p>
     </div>
 </section>
 
-<!-- SERVICES SECTION -->
-<section style="background-color: #f9f5f4; padding: 4em 2em; text-align: center;">
-    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: #d3ab9e; margin-top: 0;">EXCLUSIVE SERVICES</h2>
+<!-- EXCLUSIVE SERVICES SECTION -->
+<section style="background-color: #f8efec; text-align: center; padding: 4em 2em;">
+    <p class="fade-in" style="font-family: Lato, sans-serif; color: #d3ab9e;">DÉCOUVREZ NOS</p>
+    <h2 class="fade-in delay-200" style="font-family: 'Playfair Display', serif; font-size: 3rem; color: #d3ab9e; margin-top: 0;">SERVICES EXCLUSIFS</h2>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1em; margin-top: 2em;">
-        <div style="position: relative;">
-            <img src="/media/braids.jpg" alt="Braids" style="width: 100%; height: auto;" />
-            <h3 style="position: absolute; bottom: 1em; left: 1em; color: white; font-family: Lato, sans-serif;">BRAIDS</h3>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1em; margin-top: 2em;">
+        <!-- Service 1 -->
+        <div class="service-item" style="position: relative;">
+            <div class="service-image-wrapper image-fade">
+                <img src="@braids?.Url()" alt="Braids">
+            </div>
+            <p class="fade-in" style="position: absolute; bottom: 1rem; left: 1rem; color: white; font-family: Lato, sans-serif; font-weight: bold; font-size: 1.1rem;">BRAIDS</p>
         </div>
-        <div style="position: relative;">
-            <img src="/media/silk-press.jpg" alt="Silk Press" style="width: 100%; height: auto;" />
-            <h3 style="position: absolute; bottom: 1em; left: 1em; color: white; font-family: Lato, sans-serif;">SILK PRESS</h3>
+        <!-- Service 2 -->
+        <div class="service-item" style="position: relative;">
+            <div class="service-image-wrapper image-fade">
+                <img src="@silkPress?.Url()" alt="Silk Press">
+            </div>
+            <p class="fade-in" style="position: absolute; bottom: 1rem; left: 1rem; color: white; font-family: Lato, sans-serif; font-weight: bold; font-size: 1.1rem;">SILK PRESS</p>
         </div>
-        <div style="position: relative;">
-            <img src="/media/loc-maintenance.jpg" alt="Loc Maintenance" style="width: 100%; height: auto;" />
-            <h3 style="position: absolute; bottom: 1em; left: 1em; color: white; font-family: Lato, sans-serif;">LOC MAINTENANCE</h3>
+        <!-- Service 3 -->
+        <div class="service-item" style="position: relative;">
+            <div class="service-image-wrapper image-fade">
+                <img src="@locMaintenance?.Url()" alt="Loc Maintenance">
+            </div>
+            <p class="fade-in" style="position: absolute; bottom: 1rem; left: 1rem; color: white; font-family: Lato, sans-serif; font-weight: bold; font-size: 1.1rem;">LOC MAINTENANCE</p>
         </div>
-        <div style="position: relative;">
-            <img src="/media/natural-styles.jpg" alt="Natural Styles" style="width: 100%; height: auto;" />
-            <h3 style="position: absolute; bottom: 1em; left: 1em; color: white; font-family: Lato, sans-serif;">NATURAL STYLES</h3>
+        <!-- Service 4 -->
+        <div class="service-item" style="position: relative;">
+            <div class="service-image-wrapper image-fade">
+                <img src="@naturalStyles?.Url()" alt="Natural Styles">
+            </div>
+            <p class="fade-in" style="position: absolute; bottom: 1rem; left: 1rem; color: white; font-family: Lato, sans-serif; font-weight: bold; font-size: 1.1rem;">NATURAL STYLES</p>
         </div>
     </div>
 </section>
+
 
 <!-- TESTIMONIALS SECTION -->
 <section style="background-color: #ead3ca; padding: 5em 2em; text-align: center;">
-    <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: white;">TÉMOIGNAGES</h2>
+    <h2 class="fade-in" style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: white;">TÉMOIGNAGES</h2>
 
-    <div id="testimonial-slider" style="position: relative; max-width: 900px; margin: 2em auto; color: white; font-family: Lato, sans-serif;">
-        <div class="testimonial" style="display: block;">
-            <p style="font-size: 1.2rem;">"Très bon coiffeur qui s’est installé récemment dans le coin! Le personnel est cool et professionnel et le lieu est décoré avec style !"</p>
+    <div id="testimonial-slider" class="testimonial-slider fade-in delay-200">
+        <div class="testimonial active">
+            <p style="font-size: 1.2rem;">"Très bon coiffeur qui s'est installé récemment dans le coin! Le personnel est cool et professionnel et le lieu est décoré avec style !"</p>
             <p><strong>— Adrien C.</strong></p>
         </div>
-        <div class="testimonial" style="display: none;">
+        <div class="testimonial">
             <p style="font-size: 1.2rem;">"Bon accueil et service de qualité offert par Anne-Marie. [...] Contente d'avoir trouvé ce salon!"</p>
             <p><strong>— Wiem Soufia</strong></p>
         </div>
-        <div class="testimonial" style="display: none;">
+        <div class="testimonial">
             <p style="font-size: 1.2rem;">"Une safe place pour les cheveux bouclés ou frisés. [...] Merci encore :)"</p>
             <p><strong>— Inès Abid</strong></p>
         </div>
 
-        <button onclick="slideTestimonial(-1)" style="position: absolute; left: -50px; top: 50%; transform: translateY(-50%); font-size: 2rem;">❮</button>
-        <button onclick="slideTestimonial(1)" style="position: absolute; right: -50px; top: 50%; transform: translateY(-50%); font-size: 2rem;">❯</button>
+        <button onclick="slideTestimonial(-1)" class="testimonial-button prev fade-in delay-400">❮</button>
+        <button onclick="slideTestimonial(1)" class="testimonial-button next fade-in delay-400">❯</button>
     </div>
 </section>
 
@@ -68,8 +87,25 @@
     const testimonials = document.querySelectorAll('.testimonial');
 
     function slideTestimonial(n) {
-        testimonials[current].style.display = "none";
+        testimonials[current].classList.remove('active');
         current = (current + n + testimonials.length) % testimonials.length;
-        testimonials[current].style.display = "block";
+        testimonials[current].classList.add('active');
     }
+
+    // Intersection Observer for animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px'
+    });
+
+    // Observe all elements with fade-in and image-fade classes
+    document.querySelectorAll('.fade-in, .image-fade').forEach(element => {
+        observer.observe(element);
+    });
 </script>
