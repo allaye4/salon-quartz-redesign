@@ -1,0 +1,84 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "_Layout.cshtml";
+    ViewData["Title"] = "Académie";
+    var courseImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("courseImage");
+}
+
+<section style="padding: 5em 2em; background-color: #fdf5f3;">
+    <div class="fade-in" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <span style="font-family: Lato, sans-serif; color: #d3ab9e; text-transform: uppercase; margin-bottom: 1em; display: block;">
+            Plus que 0 jours avant l'événement
+        </span>
+        
+        <h1 style="font-family: 'Playfair Display', serif; color: #d3ab9e; font-size: 3rem; margin-bottom: 1em;">
+            L'art du Tressage par Reina
+        </h1>
+
+        <div class="course-info fade-in delay-200" style="background-color: white; padding: 3em; border-radius: 8px; margin-bottom: 2em; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); max-width: 800px; margin-left: auto; margin-right: auto;">
+            <div class="image-wrapper fade-in" style="margin-bottom: 2em; border-radius: 8px; overflow: hidden;">
+                <img src="@courseImage?.Url()" alt="Course Image" style="width: 100%; height: 400px; object-fit: cover;">
+            </div>
+
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #666; margin-bottom: 2em;">
+                Apprenez l'art du tressage dans un environnement accueillant et professionnel grâce à nos cours pour débutants. Ce cours est spécialement conçu pour vous donner les bases nécessaires pour maîtriser différentes techniques de tressage, même si vous n'avez aucune expérience préalable.
+            </p>
+
+            <div style="text-align: left; margin-bottom: 2em;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #d3ab9e; margin-bottom: 0.5em;">Quand</h3>
+                <p style="color: #666;">27 avr. 2025, 14:00 — 18:00</p>
+
+                <h3 style="font-family: 'Playfair Display', serif; color: #d3ab9e; margin: 1em 0 0.5em;">Où</h3>
+                <p style="color: #666;">Salon Quartz</p>
+                <p style="color: #666;">2801 Rue Ontario E, Montréal, QC H2K 1X5, Canada</p>
+            </div>
+
+            <a href="#" class="fade-in delay-400" style="display: inline-block; background-color: #d3ab9e; color: white; padding: 1em 3em; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
+                Détails
+            </a>
+
+            <div style="margin-top: 2em; display: flex; justify-content: center; gap: 2em;">
+                <a href="#" style="color: #d3ab9e;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="color: #d3ab9e;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: #d3ab9e;"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .delay-200 {
+        transition-delay: 0.2s;
+    }
+
+    .delay-400 {
+        transition-delay: 0.4s;
+    }
+</style>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.fade-in').forEach(element => {
+        observer.observe(element);
+    });
+</script>

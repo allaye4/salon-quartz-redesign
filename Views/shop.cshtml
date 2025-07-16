@@ -1,6 +1,229 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@{ Layout = "_Layout.cshtml"; ViewData["Title"] = Model.Value("pageTitle"); }
-<section class="shop">
-  <h1>@Model.Value("pageTitle")</h1>
-  <div>@Html.Raw(Model.Value("mainContent"))</div>
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    Layout = "_Layout";
+    var products = Model.Children().Where(x => x.ContentType.Alias == "productItem");
+}
+
+<section style="background-color: #fdf5f3; padding: 5em 2em;">
+    <div class="fade-in" style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <h1 style="font-family: 'Playfair Display', serif; color: #d3ab9e; font-size: 3rem; margin-bottom: 0.5em;">
+            @Model.Value("pageTitle")
+        </h1>
+        <p style="color: #666; font-size: 1.1rem; margin-bottom: 3em; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Explorez notre boutique en ligne et découvrez une gamme étendue de produits soigneusement sélectionnés pour répondre à vos besoins capillaires.
+        </p>
+
+        <!-- Filters -->
+        <div class="fade-in delay-200" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1em; margin-bottom: 3em;">
+            <select class="filter-select" id="filterBenefit">
+                <option value="">Bienfaits</option>
+                <option value="Hydratation">Hydratation</option>
+                <option value="Volume">Volume</option>
+            </select>
+            <select class="filter-select" id="filterType">
+                <option value="">Type de produit</option>
+                <option value="Shampooing">Shampooing</option>
+                <option value="Masque">Masque</option>
+            </select>
+            <select class="filter-select" id="filterBrand">
+                <option value="">Marque</option>
+                <option value="Kérastase">Kérastase</option>
+                <option value="Shu Uemura">Shu Uemura</option>
+            </select>
+            <select class="filter-select" id="sortBy">
+                <option value="">Trier par : Meilleures ventes</option>
+                <option value="priceAsc">Prix: Croissant</option>
+                <option value="priceDesc">Prix: Décroissant</option>
+            </select>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid fade-in delay-400" id="productGrid">
+            @foreach (var product in products)
+            {
+                var img = product.Value<IPublishedContent>("productImage");
+                var name = product.Value("productName");
+                var line = product.Value("productLine");
+                var price = product.Value<decimal>("productPrice");
+                var type = product.Value("productType");
+                var benefit = product.Value("productBenefits");
+                var brand = product.Value("productBrand");
+
+                <div class="product-item"
+                     data-price="@price"
+                     data-type="@type"
+                     data-benefit="@benefit"
+                     data-brand="@brand">
+                    <img src="@img?.Url()" alt="@name" />
+                    <div class="product-info">
+                        <h3>@name</h3>
+                        <p class="product-line">@line</p>
+                        <p class="product-price">@price.ToString("C")</p>
+                        <button class="add-to-cart">Ajouter au panier</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </section>
+
+<style>
+    .filter-select {
+        padding: 0.8em 1.5em;
+        border: 1px solid #d3ab9e;
+        border-radius: 30px;
+        background-color: white;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .filter-select:hover {
+        border-color: #c19a8d;
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2em;
+        padding: 1em;
+    }
+
+    .product-item {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+    }
+
+    .product-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-item img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .product-info {
+        padding: 1.5em;
+        text-align: left;
+    }
+
+    .product-info h3 {
+        font-family: 'Playfair Display', serif;
+        color: #333;
+        margin-bottom: 0.5em;
+    }
+
+    .product-line {
+        color: #666;
+        margin-bottom: 1em;
+    }
+
+    .product-price {
+        color: #d3ab9e;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 1em;
+    }
+
+    .add-to-cart {
+        width: 100%;
+        padding: 0.8em;
+        background-color: transparent;
+        border: 1px solid #d3ab9e;
+        color: #d3ab9e;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+    .add-to-cart:hover {
+        background-color: #d3ab9e;
+        color: white;
+    }
+
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .delay-200 {
+        transition-delay: 0.2s;
+    }
+
+    .delay-400 {
+        transition-delay: 0.4s;
+    }
+</style>
+
+<script>
+    // Intersection Observer for animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(element => {
+        observer.observe(element);
+    });
+
+    const benefitFilter = document.getElementById('filterBenefit');
+    const typeFilter = document.getElementById('filterType');
+    const brandFilter = document.getElementById('filterBrand');
+    const sortBy = document.getElementById('sortBy');
+    const grid = document.getElementById('productGrid');
+
+    function filterProducts() {
+        const benefit = benefitFilter.value;
+        const type = typeFilter.value;
+        const brand = brandFilter.value;
+
+        document.querySelectorAll('.product-item').forEach(item => {
+            const matchesBenefit = !benefit || item.dataset.benefit === benefit;
+            const matchesType = !type || item.dataset.type === type;
+            const matchesBrand = !brand || item.dataset.brand === brand;
+            item.style.display = (matchesBenefit && matchesType && matchesBrand) ? '' : 'none';
+        });
+    }
+
+    function sortProducts() {
+        const items = Array.from(document.querySelectorAll('.product-item'));
+        const sortValue = sortBy.value;
+
+        items.sort((a, b) => {
+            const priceA = parseFloat(a.dataset.price);
+            const priceB = parseFloat(b.dataset.price);
+
+            if (sortValue === 'priceAsc') return priceA - priceB;
+            if (sortValue === 'priceDesc') return priceB - priceA;
+            return 0;
+        });
+
+        items.forEach(item => grid.appendChild(item));
+    }
+
+    benefitFilter.addEventListener('change', filterProducts);
+    typeFilter.addEventListener('change', filterProducts);
+    brandFilter.addEventListener('change', filterProducts);
+    sortBy.addEventListener('change', () => {
+        sortProducts();
+        filterProducts();
+    });
+</script>

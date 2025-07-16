@@ -1,7 +1,276 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@{ Layout = "_Layout.cshtml"; ViewData["Title"] = Model.Value("pageTitle"); }
-<section class="about">
-  <h1>@Model.Value("pageTitle")</h1>
-  <div>@Html.Raw(Model.Value("bioContent"))</div>
-  <img src="@Model.MediaUrl("teamPhoto")" alt="Team Photo" />
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "À propos";
+
+    // Team member images
+    var valerieImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("valerieImage");
+    var anneMarieImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("anneMarieImage");
+    var amandaImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("amandaImage");
+    var elissaImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("elissaImage");
+    var alexandraImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("alexandraImage");
+    var melynaImage = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("melynaImage");
+
+    // Icons for "Pourquoi choisir"
+    var yourBilingualIcon = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("yourbilingualicon");
+    var yourVersatilityIcon = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("yourversatilityicon");
+    var yourTeamIcon = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("yourteamicon");
+    var yourCoffeeIcon = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("yourcoffeeicon");
+    var yourCertificateIcon = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("yourcertificateicon");
+    var yourWifiIcon = Model.Value<Umbraco.Cms.Core.Models.MediaWithCrops>("yourwifiicon");
+}
+
+<style>
+    .staff-container {
+        background-color: #fdf5f3;
+        padding: 2em;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow-y: scroll;
+        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;  /* IE and Edge */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .staff-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .staff-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: 2em;
+        margin-bottom: 4em;
+        min-height: 400px;
+    }
+
+    .image-wrapper {
+        flex: 1;
+        min-width: 280px;
+        height: 400px;
+    }
+
+    .image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .content-wrapper {
+        flex: 2;
+        display: flex;
+        height: 333px;
+    }
+
+    .staff-name {
+        font-family: 'Playfair Display', serif;
+        color: #333;
+        font-size: 2.5rem;
+        margin-bottom: 0.5em;
+        position: relative;
+        display: inline-block;
+        padding: 0;  /* Changed from 0.2em 0 */
+        margin-top: 0;  /* Added to remove top space */
+    }
+
+    .staff-role {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 1.5em;
+    }
+
+    .staff-bio {
+        line-height: 1.6;
+        color: #444;
+    }
+
+    .features-section {
+        background-color: #e9d2c8;
+        padding: 4em 2em;
+        color: white;
+    }
+
+    .features-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2em;
+        text-align: center;
+    }
+
+   .feature-box {
+    flex: 0 0 30%;
+    max-width: 30%;
+    text-align: center;
+    }
+
+    .feature-box img {
+        height: 50px;
+        margin-bottom: 1em;
+    }
+
+    .feature-box h3 {
+        font-weight: 700;
+    }
+</style>
+
+<!-- Pourquoi choisir le Salon Quartz -->
+<section style="padding: 4em 2em; background-color: #fff;">
+    <div style="max-width: 1100px; margin: 0 auto; text-align: center;">
+        <h1 style="font-size: 2.8rem; margin-bottom: 1em;">POURQUOI CHOISIR LE SALON QUARTZ ?</h1>
+        <p style="max-width: 900px; margin: 0 auto; font-size: 1.1rem; line-height: 1.7;">
+            Notre équipe qualifiée vous offre des services de qualité dans une ambiance conviviale. Tresses, balayage, barbier et bien plus encore. 
+            Faites confiance à notre expertise pour vous mettre en valeur et vous faire sentir bien. Visitez-nous et profitez d'une expérience exceptionnelle au Salon Quartz.
+        </p>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="features-container">
+        <div class="feature-box">
+            <img src="@yourBilingualIcon?.Url()" alt="Bilingue" />
+            <h3>Bilingue</h3>
+            <p>Notre équipe bilingue (FR & EN) reflète notre diversité. Amanda parle aussi espagnol!</p>
+        </div>
+        <div class="feature-box">
+            <img src="@yourVersatilityIcon?.Url()" alt="Versatilité" />
+            <h3>Versatilité</h3>
+            <p>Peu importe votre texture de cheveux ou le type d'événement, nous sommes là pour vous sublimer.</p>
+        </div>
+        <div class="feature-box">
+            <img src="@yourTeamIcon?.Url()" alt="Notre équipe" />
+            <h3>Notre équipe</h3>
+            <p>Un service chaleureux et personnalisé dans un espace inclusif et accueillant.</p>
+        </div>
+        <div class="feature-box">
+            <img src="@yourCoffeeIcon?.Url()" alt="Café offert" />
+            <h3>Café, eau & thé</h3>
+            <p>Gratuitement offerts à tous nos clients. Profitez de notre machine Nespresso sur place.</p>
+        </div>
+        <div class="feature-box">
+            <img src="@yourCertificateIcon?.Url()" alt="Professionnels agréés" />
+            <h3>Professionnels agréés</h3>
+            <p>Reina, Anne-Marie & Élissa sont certifiées par le ministère du Travail du Québec.</p>
+        </div>
+        <div class="feature-box">
+            <img src="@yourWifiIcon?.Url()" alt="Wi-Fi Gratuit" />
+            <h3>Wi-Fi Gratuit</h3>
+            <p>Restez connectés pendant votre rendez-vous – demandez simplement le mot de passe.</p>
+        </div>
+    </div>
+</section>
+
+<section style="padding: 4em 2em; background-color: #fff;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+        <!-- Valérie -->
+        <div class="staff-wrapper">
+            <div class="image-wrapper">
+                <img src="@valerieImage?.Url()" alt="Valérie Reina Dinelle" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div class="content-wrapper">
+                <div class="staff-container">
+                    <h2 class="staff-name">Valérie Reina Dinelle</h2>
+                    <h4 class="staff-role">Propriétaire, tresseuse, coloriste</h4>
+                    <p class="staff-bio">Ma passion pour la coiffure est née lorsque j’étais toute petite, à l’âge de 7 ans plus précisément! Je passais mon temps libre à me coiffer moi-même car ma mère étant québécoise ne savait  pas gérer mes cheveux, mon afro est venu du côté de mon père qui vient du Panama ! Elle m'a appris à faire une tresse et depuis je n’ai jamais arrêté d’en apprendre de plus en plus sur la coiffure. 
+En juin 2021, mon plus grand rêve est devenu réalité, j’ai ouvert mon premier salon, le salon Quartz, beaucoup plus qu’un salon de coiffure, c’est un salon de beauté, manucure pédicure, maquillage, facial etc. Nos clients sont traités aux petits oignons ! Un endroit avec une atmosphère décontractée, où les hommes et les femmes sont les bienvenus!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Anne-Marie -->
+        <div class="staff-wrapper">
+            <div class="content-wrapper">
+                <div class="staff-container">
+                    <h2 class="staff-name">Anne-Marie Vixama</h2>
+                    <h4 class="staff-role">Barbière, coloriste, maquilleuse</h4>
+                    <p class="staff-bio">J'ai obtenu mon diplôme de coiffure en 2012 au CFP Antoine-de-Saint-Exupéry. En 2015, j'ai acquis un certificat du Collège Lasalle en maquillage artistique. J'ai terminé un cours de barber au salon newav_academy en 2020.
+
+
+J'ai toujours été passionné par tout ce qui entoure le monde de la mode. Selon moi, la coiffure, le maquillage et les tendances vestimentaires sont tous des moyens d'exprimer nôtre personnalité.
+
+
+J'aime être en mesure de mettre de l'avant mon esprit artistique. J'adore travailler avec le public, offrir un service de qualité tout en étant créative, découvrir de nouvelles techniques et tendances.</p>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="@anneMarieImage?.Url()" alt="Anne-Marie Vixama" style="width: 100%; border-radius: 8px;">
+            </div>
+        </div>
+
+        <!-- Amanda -->
+        <div class="staff-wrapper">
+            <div class="image-wrapper">
+                <img src="@amandaImage?.Url()" alt="Amanda Alvarez" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div class="content-wrapper">
+                <div class="staff-container">
+                    <h2 class="staff-name">Amanda Alvarez</h2>
+                    <h4 class="staff-role">Dreads, twist & esthéticienne</h4>
+                    <p class="staff-bio">Ça fait à peine 3 ans que je suis dans le domaine et j’adore ! Je suis tombée amoureuse de mon métier, j’étudiais en génie civil mais je me suis rendu compte que ce n’était pas ma vois donc j’ai poursuivi en esthétique pour faire ce qui me plaît vraiment, je vais graduer en septembre 2023 et j’offrirai mes services d’esthéticienne au salon Quartz.
+
+Ce que j’aime de mon métier c’est l’équipe avec qui je travaille sans oublier ma super clientèle que j’adore et que j’ai bâti assez rapidement ! J’en suis super fière et j’adore vous voir heureux.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Élissa -->
+        <div class="staff-wrapper">
+            <div class="content-wrapper">
+                <div class="staff-container">
+                    <h2 class="staff-name">Élissa Manicone</h2>
+                    <h4 class="staff-role">Coiffeuse, coloriste, extensions, traitement</h4>
+                    <p class="staff-bio">Depuis mon très jeune âge j’ai une passion pour les cheveux. Quand j’étais jeune mes tantes italiennes me demandaient de faire leur brushing et ceci a déclenché en moi le besoin d’en apprendre de plus en plus à propos des cheveux.
+
+Le fait que quand j’étais jeune ma mère qui ne savais pas s’occuper de mes cheveux frisés a fait en sorte que j'ai eu beaucoup de difficultés à me coiffer. 
+
+
+Je me spécialise en couleur mais surtout en balayage, mèches et transformation extrême. J’adore les challenges et il n’y a rien qui me fait peur.</p>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="@elissaImage?.Url()" alt="Élissa Manicone" style="width: 100%; border-radius: 8px;">
+            </div>
+        </div>
+
+        <!-- Alexandra -->
+        <div class="staff-wrapper">
+            <div class="image-wrapper">
+                <img src="@alexandraImage?.Url()" alt="Alexandra Alixe" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div class="content-wrapper">
+                <div class="staff-container">
+                    <h2 class="staff-name">Alexandra Alixe</h2>
+                    <h4 class="staff-role">Tresseuse, faux locs, extension, twist</h4>
+                    <p class="staff-bio">Ça fait environ 12 ans que je coiffe et 8 ans que je propose mes services sur Instagram. J’ai commencé par me coiffer seule car j’ai voulu essayer des coiffures que ma mère ne me faisait pas forcément et j’ai vraiment appris à aimer mes cheveux de cette manière car il y a une telle versatilité avec le cheveu afro, pouvoir faire TOUT ce qu’on a envie de faire tout en faisant des coiffures protectrices !
+
+Ce que j’aime dans mon métier c’est le fait de pouvoir apporter quelque chose de positif dans la vie de chaque personne que je coiffe. La confiance et l’amour de soi c’est une base à avoir pour se sentir bien et pouvoir aider quelqu’un à faire grandir ça en elle, c’est ma plus belle récompense. D’autant plus pour les personnes aux cheveux afro à qui on a longtemps dénigré le cheveu, c’est un mini combat que je mène pour que mes client.e.s puissent apprendre à aimer leurs cheveux de plus en plus. So c’est ça l’effet AlxBraids</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mélyna -->
+        <div class="staff-wrapper">
+            <div class="content-wrapper">
+                <div class="staff-container">
+                    <h2 class="staff-name">Mélyna Cadet-Victor</h2>
+                    <h4 class="staff-role">Spécialiste en pose de perruque & leave out</h4>
+                    <p class="staff-bio">Durant la pandémie, l’envie de débuter une entreprise à commencer. J’ai alors décidé de vendre des extensions de cheveux mais se n’était pas assez. Le contact humain et d’offrir un service de qualité dans le but d’améliorer l’apparence et/ou le bien être d’une personne était plus important pour moi et ma pousser vers la coiffure. Après avoir passé des nuits sur youtube, j’ai appris la confection de perruque, les installations et les soins d’extensions.
+
+ 
+
+Je me suis entouré des meilleures à Montréal pour pouvoir évoluer dans mon domaine et j’ai pu commencer ma carrière. Présentement spécialiser dans les extensions de cheveux et perruques j’aimerais éventuellement être formée et agrandir mes compétences dans les soins de cheveux naturel comme silk press, traitements capillaires, coupe de cheveux, etc.</p>
+                </div>
+            </div>
+            <div class="image-wrapper">
+                <img src="@melynaImage?.Url()" alt="Mélyna Cadet-Victor" style="width: 100%; border-radius: 8px;">
+            </div>
+        </div>
+    </div>
 </section>

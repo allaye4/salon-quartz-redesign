@@ -1,13 +1,77 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@{ Layout = "_Layout.cshtml"; ViewData["Title"] = "Booking"; }
-<section class="booking">
-  <h1>Booking</h1>
-  <p>@Model.Value("bookingText")</p>
-  @{
-    var link = Model.Value<IEnumerable<Umbraco.Cms.Core.Models.Link>>("bookingLink")?.FirstOrDefault();
-  }
-  @if (link != null)
-  {
-    <a href="@link.Url" class="btn">Book Now</a>
-  }
+@{ 
+    Layout = "_Layout.cshtml"; 
+    ViewData["Title"] = "Réservation"; 
+}
+
+<style>
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .delay-200 {
+        transition-delay: 0.2s;
+    }
+
+    .delay-400 {
+        transition-delay: 0.4s;
+    }
+
+    .booking-button:hover {
+        background-color: #c19a8d !important;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(211, 171, 158, 0.2);
+    }
+</style>
+
+<section class="booking-section" style="padding: 5em 2em; background-color: #fdf5f3; min-height: 60vh;">
+    <div class="booking-container fade-in" style="max-width: 800px; margin: 0 auto; text-align: center;">
+        <h1 style="font-family: 'Playfair Display', serif; color: #d3ab9e; font-size: 3rem; margin-bottom: 1.5em;">
+            Réservation
+        </h1>
+
+        <div class="contact-info fade-in delay-200" style="background-color: white; padding: 3em; border-radius: 8px; margin-bottom: 2em; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #666; margin-bottom: 2em;">
+                Nous sommes enchantés de vous accueillir pour planifier votre prochain rendez-vous, si vous avez des questions ou des commentaires, téléphonez nous au 
+                <a href="tel:438-375-7851" style="color: #d3ab9e; text-decoration: none; font-weight: bold;">438-375-7851</a> 
+                ou envoyez nous un e-mail au 
+                <a href="mailto:salonquartzmtl@gmail.com" style="color: #d3ab9e; text-decoration: none; font-weight: bold;">salonquartzmtl@gmail.com</a>
+            </p>
+
+            @{
+                var link = Model.Value<IEnumerable<Umbraco.Cms.Core.Models.Link>>("bookingLink")?.FirstOrDefault();
+            }
+            @if (link != null)
+            {
+                <a href="@link.Url" class="booking-button fade-in delay-400" style="display: inline-block; background-color: #d3ab9e; color: white; padding: 1em 3em; border-radius: 30px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
+                    Prendre rendez-vous
+                </a>
+            }
+        </div>
+    </div>
 </section>
+
+<script>
+    // Intersection Observer for animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe all fade-in elements
+    document.querySelectorAll('.fade-in').forEach(element => {
+        observer.observe(element);
+    });
+</script>
